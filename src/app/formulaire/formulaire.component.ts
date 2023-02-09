@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup,  FormGroupDirective, NgForm,Validators,FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 //import { emailValidator } from './email-validator.directive';
-
 
 interface IUser {
   name: string;
@@ -11,14 +17,12 @@ interface IUser {
   showPassword: boolean;
 }
 
-
 @Component({
   selector: 'app-formulaire',
   templateUrl: './formulaire.component.html',
-  styleUrls: ['./formulaire.component.scss']
+  styleUrls: ['./formulaire.component.scss'],
 })
 export class FormulaireComponent implements OnInit {
-
   reactiveForm!: FormGroup;
   user: IUser;
 
@@ -28,17 +32,24 @@ export class FormulaireComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      name: new FormControl(this.user.name, 
-        [Validators.required, Validators.minLength(1), Validators.maxLength(250), ]),
-        
-      nickname: new FormControl(this.user.nickname,
-         [ Validators.maxLength(10),]),
+      name: new FormControl(this.user.name, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(250),
+      ]),
 
-      email: new FormControl(this.user.email,
-         [ Validators.required,Validators.minLength(1), Validators.email]),
+      nickname: new FormControl(this.user.nickname, [Validators.maxLength(10)]),
 
-      password: new FormControl(this.user.password,
-         [Validators.required, Validators.minLength(15), ]),
+      email: new FormControl(this.user.email, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.email,
+      ]),
+
+      password: new FormControl(this.user.password, [
+        Validators.required,
+        Validators.minLength(15),
+      ]),
     });
   }
 
@@ -73,6 +84,4 @@ export class FormulaireComponent implements OnInit {
     console.info('Email:', this.user.email);
     console.info('Password:', this.user.password);
   }
-
-
 }
